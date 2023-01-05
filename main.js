@@ -1,4 +1,5 @@
 const container = document.getElementById('itemsContainer')
+let productsArr
 //При загрузке страницы отрисовываются первые n элементов
 window.onload = function() {
     return fetch('https://dummyjson.com/products')
@@ -7,12 +8,13 @@ window.onload = function() {
         })
         .then((data) => {
             const products = data.products;
-            return renderItems(products)
+            productsArr = products
+            renderItems(products)
         })
 }
 //Вырисовка продуктов в необходимом количестве
-const renderItems = function(products) {
-    for (let i=0; i<10; i++) {
+const renderItems = function(products, count=10) {
+    for (let i=0; i<count; i++) {
         const itemId = products[i].id;
         const title = products[i].title;
             container.innerHTML += `
@@ -22,23 +24,21 @@ const renderItems = function(products) {
     `
     }
 }
-//Создание всплывающего окна
-container.onmouseover = function(event) {
-    let target = event.target;
+ //Создание всплывающего окна
+ container.onmouseover = function(event) {
+    //Определение элемента
+    const target = event.target;
+    if (target.className === "item") {
+        const id = target.id;
+        const itemObj = productsArr[id-1];
     
-}
-//Отображение продуктов на странице
-const getItems = function(index) {
-    return fetch('https://dummyjson.com/products')
-        .then((response) => {
-            return response.json()
-        })
-        .then((data) => {
-            const itemId = data.products[index].id
-            container.innerHTML += `
-        <li class="item" id=${itemId}>
-            ${(data.products[index].title)}
-        </li>
-    `
-        })
+        let tooltipElem = document.createElement('div');
+        tooltipElem.className = 'tooltip';
+        tooltipElem.id = id;
+    
+        for (key in itemObj) {
+           tooltipElem.innerHTML += `${key}:${itemObj[key]}` 
+        }
+    }
+    
 }
