@@ -42,6 +42,12 @@ container.onmouseover = function(event) {
             }
             else tooltipElem.innerHTML += `${key}:${itemObj[key]} `
         }
-        console.log(tooltipElem.style)
+        document.onmouseout = function() {
+            if (tooltipElem) {
+                tooltipElem.remove();
+                tooltipElem = null
+            }
+        }
     }
+    
 }
