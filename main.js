@@ -25,8 +25,6 @@ const renderItems = function(products, count=10) {
     }
 }
 
-// let li = document.getElementById('itemsContainer').children;
-// console.log(li)
 container.onmouseover = function(event) {
     const target = event.target;
     if (target.className === "item") {
@@ -47,22 +45,3 @@ container.onmouseover = function(event) {
         console.log(tooltipElem.style)
     }
 }
- //Создание всплывающего окна
-//  li.onmouseover = function(event) {
-//     console.log(1)
-//     //Определение элемента
-//     const target = event.target;
-//     if (target.className === "item") {
-//         const id = target.id;
-//         const itemObj = productsArr[id-1];
-    
-//         let tooltipElem = document.createElement('div');
-//         tooltipElem.className = 'tooltip';
-//         tooltipElem.id = id;
-    
-//         for (key in itemObj) {
-//            tooltipElem.innerHTML += `${key}:${itemObj[key]}` 
-//         }
-//     }
-    
-// }
