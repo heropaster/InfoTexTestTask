@@ -1,7 +1,7 @@
 .container {
     border:solid 3px #9718EB;
     padding-left: 15px;
-    margin: 0;
+    margin: 0 auto;
     display: block;
     border-radius: 5px;
     width: 220px;
@@ -16,7 +16,8 @@
     position:fixed;
     padding:10px 20px;
     border: solid 3px #33F2A7;
-    text-align: center;
+    text-align: left;
+    max-width: 550px;
     background:#fff;
     box-shadow: 3px 3px 3px #ff11;
 }
