@@ -36,12 +36,32 @@ container.onmouseover = function(event) {
         tooltipElem.className = "tooltip";
         tooltipElem.id = id;
 
+        //Перебор свойств продукта
         for (key in itemObj) {
             if (key === 'id') {
                tooltipElem.innerHTML += ""
             }
-            else tooltipElem.innerHTML += `${key}:${itemObj[key]} `
+            else if (key === 'thumbnail') {
+                tooltipElem.innerHTML += `<img src=${itemObj[key]}>`
+            }
+            else if (key === 'images') {
+                continue
+            }
+            else tooltipElem.innerHTML += `<b>${key}:</b>${itemObj[key]}<br> `
         }
+        //Определяем размеры и координаты появления подсказки
+        let size = target.getBoundingClientRect();
+        let left = size.left
+        if (left < 0) {
+            left = 0
+        }
+        let top = size.top - tooltipElem.offsetHeight
+        if (top < 0) {
+          top = size.top + target.offsetHeight
+        }
+      tooltipElem.style.left = 223 + left + 'px';
+      tooltipElem.style.top = top + 'px';
+        //Скрывание подсказки если мышка не наведена
         document.onmouseout = function() {
             if (tooltipElem) {
                 tooltipElem.remove();
