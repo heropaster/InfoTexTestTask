@@ -18,7 +18,7 @@ const renderItems = function(products, count=10) {
         const itemId = products[i].id;
         const title = products[i].title;
             container.innerHTML += `
-        <li class="item" id=${itemId}>
+        <li class="item" id=${itemId} draggable="true">
             ${(title)}
         </li>
     `
@@ -34,7 +34,7 @@ container.onmouseover = function(event) {
         let tooltipElem = document.createElement("div");
         document.body.append(tooltipElem)
         tooltipElem.className = "tooltip";
-        tooltipElem.id = id;
+       
 
         //Перебор свойств продукта
         for (key in itemObj) {
@@ -57,7 +57,7 @@ container.onmouseover = function(event) {
         }
         let top = size.top - tooltipElem.offsetHeight
         if (top < 0) {
-          top = size.top + target.offsetHeight
+          top = size.top + target.offsetHeight - 20
         }
       tooltipElem.style.left = 223 + left + 'px';
       tooltipElem.style.top = top + 'px';
@@ -71,3 +71,27 @@ container.onmouseover = function(event) {
     }
     
 }
+//Drag&drop logic
+container.addEventListener('dragstart', function(event) {
+    event.target.classList.add('selected');
+})
+container.addEventListener('dragover', function(event) {
+    event.preventDefault();
+
+    const currentElem = container.querySelector('.selected');
+    const lowerElem = event.target;
+
+    //Является ли элемент под курсором одним из элементов списка
+    const isMoveable = currentElem !== lowerElem && lowerElem.classList.contains('item');
+    if(!isMoveable) {
+        return
+    };
+
+    const nextElem = (lowerElem === currentElem.nextElementSibling) ? lowerElem.nextElementSibling : lowerElem;
+    container.insertBefore(currentElem, nextElem);
+
+
+})
+container.addEventListener('dragend', function(event) {
+    event.target.classList.remove('selected');
+})
