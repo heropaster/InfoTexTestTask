@@ -20,4 +20,15 @@
     max-width: 550px;
     background:#fff;
     box-shadow: 3px 3px 3px #ff11;
+    animation:0.6s show ease
+}
+li {
+    cursor:grab;
+}
+.selected {
+    opacity: 0.5;
+}
+@keyframes show {
+    from {opacity: 0%;}
+    to {opacity: 100%;}
 }
