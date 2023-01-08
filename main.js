@@ -1,6 +1,10 @@
 const container = document.getElementById('itemsContainer');
+const itemsCounter = document.getElementById('itemsCounter');
+
 let productsArr
-//При загрузке страницы отрисовываются первые n элементов
+
+
+//При загрузке страницы отрисовываются первые 10 элементов
 window.onload = function() {
     return fetch('https://dummyjson.com/products')
         .then((response) => {
@@ -8,10 +12,32 @@ window.onload = function() {
         })
         .then((data) => {
             const products = data.products;
+
             productsArr = products
             renderItems(products)
         })
 }
+
+//Если необходимо другое количество элементов
+container.addEventListener('change', function(event) {
+    if (event.target.id === 'itemsCounter') {
+        let currentValue = +event.target.value;
+        container.innerHTML = `
+        <select name="itemsCount" id="itemsCounter" class="itemsCount">
+            <option value="">Кол-во продуктов</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+        </select>
+        <br>
+        Продукты:
+        `
+        renderItems(productsArr, currentValue)
+    }
+})//Возможно переделать рендер и сделать отрисовку необходимых элементов через display в CSS
+
 //Вырисовка продуктов в необходимом количестве
 const renderItems = function(products, count=10) {
     for (let i=0; i<count; i++) {
@@ -51,14 +77,16 @@ container.onmouseover = function(event) {
         }
         //Определяем размеры и координаты появления подсказки
         let size = target.getBoundingClientRect();
-        let left = size.left
+        let left = size.left;
         if (left < 0) {
-            left = 0
-        }
-        let top = size.top - tooltipElem.offsetHeight
+            left = 0;
+        };
+
+        let top = size.top - tooltipElem.offsetHeight;
         if (top < 0) {
-          top = size.top + target.offsetHeight - 20
-        }
+          top = size.top + target.offsetHeight - 30;
+        };
+
       tooltipElem.style.left = 223 + left + 'px';
       tooltipElem.style.top = top + 'px';
         //Скрывание подсказки если мышка не наведена
@@ -88,10 +116,11 @@ container.addEventListener('dragover', function(event) {
     };
 
     const nextElem = (lowerElem === currentElem.nextElementSibling) ? lowerElem.nextElementSibling : lowerElem;
-    container.insertBefore(currentElem, nextElem);
+    container.insertBefore(currentElem, nextElem);  
 
 
 })
 container.addEventListener('dragend', function(event) {
     event.target.classList.remove('selected');
 })
+
