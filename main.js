@@ -78,7 +78,7 @@ container.onmouseover = function(event) {
           top = size.top + target.offsetHeight - 30;
         };
 
-      tooltipElem.style.left = 223 + left + 'px';
+      tooltipElem.style.left = 288 + left + 'px';
       tooltipElem.style.top = top + 'px';
         //Скрывание подсказки если мышка не наведена
         document.onmouseout = function() {
