@@ -7,7 +7,7 @@ body {
     display: block;
     margin:0 auto;
     border-radius: 5px;
-    width: 220px;
+    width: 300px;
     min-height:300px;
 }
 .container {
@@ -20,11 +20,7 @@ body {
     font-weight: bold;
 
 }
-.itemsCount {
-    max-width: 200px;
-    height: 30px;
-    margin-bottom: 5px;
-}
+
 .item {
     border: solid 2px #EBAA6E;
     list-style-type: none;
@@ -42,6 +38,15 @@ body {
     box-shadow: 3px 3px 3px #ff11;
     animation:0.6s show ease
 }
+.selectContainer {
+    display: flex;
+    justify-content: space-between;
+}
+.selectContainer select {
+    max-width: 150px;
+    height: 30px;
+    margin-bottom: 5px;
+} 
 img {
     width: 300px;
     height: 250px;
