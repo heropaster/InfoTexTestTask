@@ -1,4 +1,5 @@
-const container = document.getElementById('itemsContainer');
+const container = document.getElementById('appContainer');
+const itemsContainer = document.getElementById('itemsContainer')
 const itemsCounter = document.getElementById('itemsCounter');
 
 let productsArr
@@ -22,20 +23,10 @@ window.onload = function() {
 container.addEventListener('change', function(event) {
     if (event.target.id === 'itemsCounter') {
         let currentValue = +event.target.value;
-        container.innerHTML = `
-        <select name="itemsCount" id="itemsCounter" class="itemsCount">
-            <option value="">Кол-во продуктов</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-        </select>
-        <br>
-        Продукты:
-        `
-        renderItems(productsArr, currentValue)
+        itemsContainer.innerHTML = ''
+        renderItems(productsArr, currentValue);
     }
+
 })//Возможно переделать рендер и сделать отрисовку необходимых элементов через display в CSS
 
 //Вырисовка продуктов в необходимом количестве
@@ -43,7 +34,7 @@ const renderItems = function(products, count=10) {
     for (let i=0; i<count; i++) {
         const itemId = products[i].id;
         const title = products[i].title;
-            container.innerHTML += `
+            itemsContainer.innerHTML += `
         <li class="item" id=${itemId} draggable="true">
             ${(title)}
         </li>
@@ -100,10 +91,10 @@ container.onmouseover = function(event) {
     
 }
 //Drag&drop logic
-container.addEventListener('dragstart', function(event) {
+itemsContainer.addEventListener('dragstart', function(event) {
     event.target.classList.add('selected');
 })
-container.addEventListener('dragover', function(event) {
+itemsContainer.addEventListener('dragover', function(event) {
     event.preventDefault();
 
     const currentElem = container.querySelector('.selected');
@@ -116,11 +107,13 @@ container.addEventListener('dragover', function(event) {
     };
 
     const nextElem = (lowerElem === currentElem.nextElementSibling) ? lowerElem.nextElementSibling : lowerElem;
-    container.insertBefore(currentElem, nextElem);  
+    itemsContainer.insertBefore(currentElem, nextElem);  
 
 
 })
 container.addEventListener('dragend', function(event) {
     event.target.classList.remove('selected');
 })
+
+//Сортировка
 

@@ -1,25 +1,35 @@
 body {
     background:url('background/background.png')
 }
-.container {
+.appContainer {
     border:solid 3px;
     background:#fff;
-    padding-left: 15px;
     display: block;
     margin:0 auto;
-    list-style-type: none;
     border-radius: 5px;
     width: 220px;
     min-height:300px;
 }
+.container {
+    list-style-type: none;
+    padding: 0 10px;
+}
+.title {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+
+}
 .itemsCount {
     max-width: 200px;
     height: 30px;
+    margin-bottom: 5px;
 }
 .item {
     border: solid 2px #EBAA6E;
+    list-style-type: none;
     margin: 3px 2px;
-    padding: 0;
+    padding-left:3px;
 }
 .tooltip {
     background:#fff;

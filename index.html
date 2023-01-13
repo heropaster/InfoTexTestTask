@@ -10,18 +10,26 @@
     <link rel="prefetch" href="https://dummyjson.com/products" as="script">
 </head>
 <body>
-    <ul class="container" id="itemsContainer">
-        <select name="itemsCount" id="itemsCounter" class="itemsCount">
-            <option value="">Кол-во продуктов</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-        </select>
+    <div id="appContainer" class="appContainer">
+        <div class="selectContainer">
+            <select name="itemsCount" id="itemsCounter" class="itemsCount">
+                <option value="">Кол-во продуктов</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+            </select>
+            <select name="sort" id="sort">
+                <option value="standard">По умолчанию</option>
+                <option value="name">По имени</option>
+            </select>
+        </div>
+        
         <br>
-        Продукты:
-    </ul>
+        <span class="title">Продукты</span>
+        <ul class="container" id="itemsContainer"></ul>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
