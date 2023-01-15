@@ -3,7 +3,7 @@ const itemsContainer = document.getElementById('itemsContainer')
 const itemsCounter = document.getElementById('itemsCounter');
 
 let productsArr
-
+let itemsValue
 
 //При загрузке страницы отрисовываются первые 10 элементов
 window.onload = function() {
@@ -19,14 +19,41 @@ window.onload = function() {
         })
 }
 
-//Если необходимо другое количество элементов
+
 container.addEventListener('change', function(event) {
+    //Если необходимо другое количество элементов
     if (event.target.id === 'itemsCounter') {
+        if (event.target.value === '') {
+            return
+        }
         let currentValue = +event.target.value;
+        itemsValue = currentValue;
         itemsContainer.innerHTML = ''
         renderItems(productsArr, currentValue);
     }
+    //Сортировка
+    if (event.target.id === 'sort') {
+        if (event.target.value === 'standard') {
+            let new_ul = itemsContainer.cloneNode(false);
 
+    // declare new list and add items in
+    var list = [];
+    for(let i = itemsContainer.childNodes.length; i--;){
+        if(itemsContainer.childNodes[i].nodeName === 'LI')
+            list.push(itemsContainer.childNodes[i]);
+    }
+
+    // Sort list (for id)
+    list.sort(function(a, b){
+       return (+a.id - +b.id)
+    });
+
+    // replace sorted items in list
+    for(let i = 0; i < list.length; i++) 
+        {new_ul.appendChild(list[i]);}
+        itemsContainer.parentNode.replaceChild(new_ul, itemsContainer);
+        }
+    }
 })//Возможно переделать рендер и сделать отрисовку необходимых элементов через display в CSS
 
 //Вырисовка продуктов в необходимом количестве
@@ -115,5 +142,4 @@ container.addEventListener('dragend', function(event) {
     event.target.classList.remove('selected');
 })
 
-//Сортировка
 
