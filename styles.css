@@ -1,0 +1,63 @@
+body {
+    background:url('background/background.png')
+}
+.appContainer {
+    border:solid 3px;
+    background:#fff;
+    display: block;
+    margin:0 auto;
+    border-radius: 5px;
+    width: 300px;
+    min-height:300px;
+}
+.container {
+    list-style-type: none;
+    padding: 0 10px;
+}
+.title {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.item {
+    border: solid 2px #EBAA6E;
+    list-style-type: none;
+    margin: 3px 2px;
+    padding-left:3px;
+}
+.tooltip {
+    background:#fff;
+    position:fixed;
+    padding:10px 20px;
+    border: solid 3px #33F2A7;
+    text-align: left;
+    max-width: 550px;
+    background:#fff;
+    box-shadow: 3px 3px 3px #ff11;
+    animation:0.6s show ease
+}
+.selectContainer {
+    display: flex;
+    justify-content: space-between;
+}
+.selectContainer select {
+    max-width: 150px;
+    height: 30px;
+    margin-bottom: 5px;
+} 
+img {
+    width: 300px;
+    height: 250px;
+}
+li {
+    cursor:grab;
+}
+.selected {
+    opacity: 0.5;
+}
+@keyframes show {
+    from {opacity: 0%;}
+    to {opacity: 100%;}
+}

@@ -5,11 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://dummyjson.com/products">
+    <link rel="prefetch" href="https://dummyjson.com/products" as="script">
 </head>
 <body>
-    <ul class="container" id="itemsContainer">
-        <li>sssss</li>
-    </ul>
+    <div id="appContainer" class="appContainer">
+        <div class="selectContainer">
+            <select name="itemsCount" id="itemsCounter" class="itemsCount">
+                <option value="">Кол-во продуктов</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+            </select>
+            <select name="sort" id="sort">
+                <option value="standard">По умолчанию</option>
+                <option value="name">По имени</option>
+                <option value="price">По цене</option>
+            </select>
+        </div>
+        
+        <br>
+        <span class="title">Продукты</span>
+        <ul class="container" id="itemsContainer"></ul>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
