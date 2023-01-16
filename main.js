@@ -1,5 +1,5 @@
 const container = document.getElementById('appContainer');
-const itemsContainer = document.getElementById('itemsContainer')
+const itemsContainer = document.getElementById('itemsContainer');
 const itemsCounter = document.getElementById('itemsCounter');
 
 let productsArr
@@ -33,25 +33,41 @@ container.addEventListener('change', function(event) {
     }
     //Сортировка
     if (event.target.id === 'sort') {
-        if (event.target.value === 'standard') {
-            let new_ul = itemsContainer.cloneNode(false);
-
     // declare new list and add items in
-    var list = [];
+    let list = [];
     for(let i = itemsContainer.childNodes.length; i--;){
         if(itemsContainer.childNodes[i].nodeName === 'LI')
             list.push(itemsContainer.childNodes[i]);
     }
 
     // Sort list (for id)
-    list.sort(function(a, b){
-       return (+a.id - +b.id)
-    });
-
+    if (event.target.value === 'standard')  {
+        list.sort((a, b) => {
+            return (+a.id - +b.id)
+         });
+    }
+    //Sort list (for name)
+    else if (event.target.value === 'name') {
+        list.sort((a,b) => {
+            if (a.innerText.toLowerCase() < b.innerText.toLowerCase()) {
+                return -1
+            }
+            else if (a.innerText.toLowerCase() > b.innerText.toLowerCase()) {
+                return 1
+            };
+            return 0
+        })
+    }
+    //Sort list (for price)
+    else if (event.target.value === 'price') {
+        list.sort((a, b) => {
+            return (+a.dataset.price - +b.dataset.price)
+         });
+    }
     // replace sorted items in list
-    for(let i = 0; i < list.length; i++) 
-        {new_ul.appendChild(list[i]);}
-        itemsContainer.parentNode.replaceChild(new_ul, itemsContainer);
+    itemsContainer.childNodes = 0
+    for(let i = 0; i < list.length; i++) {
+            itemsContainer.appendChild(list[i]);
         }
     }
 })//Возможно переделать рендер и сделать отрисовку необходимых элементов через display в CSS
@@ -61,9 +77,10 @@ const renderItems = function(products, count=10) {
     for (let i=0; i<count; i++) {
         const itemId = products[i].id;
         const title = products[i].title;
+        const price = products[i].price
             itemsContainer.innerHTML += `
-        <li class="item" id=${itemId} draggable="true">
-            ${(title)}
+        <li class="item" id=${itemId} draggable="true" data-price=${price}>
+            ${(title)}: <b>${price}</b>$
         </li>
     `
     }
